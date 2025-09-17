@@ -7,9 +7,13 @@ on:
     branches: [main]
 
 jobs:
-  mongo-init:
+  mongo-init-test:
     runs-on: ubuntu-latest
     
+    env:
+      PORT: ${ { secrets.PORT } }
+      MONGO_URI: ${ { secrets.MONGO_URI } }
+
     services:
       mongo:
         image: mongo
@@ -39,23 +43,7 @@ jobs:
           npm install
           node seedTasksData.js
 
-  test:
-    runs-on: ubuntu-latest
-    needs: mongo-init
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install backend dependencies
-        working-directory: ./backend
-        run: npm install
-
       - name: Run backend tests
         working-directory: ./backend
         run: npm test
+      
