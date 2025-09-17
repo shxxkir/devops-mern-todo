@@ -9,7 +9,7 @@ describe('GET api/tasks', () => {
   });
   it('should return an array', async () => {
     const res = await request(app).get('/api/tasks');
-    expect(Array.isArray(res.body)).toBe(true);
+    expect(Array.isArray(res.body.data)).toBe(true);
   });
 });
 
