@@ -17,6 +17,8 @@ services:
       - "5000:5000"
     depends_on:
       - mongo
+    env_file:
+      - ./backend/.env.prod
     # environment:
     #   MONGO_URL: mongodb://mongo:27017/mydatabase
 
@@ -27,3 +29,5 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+    env_file:
+      - ./frontend/.env.prod
